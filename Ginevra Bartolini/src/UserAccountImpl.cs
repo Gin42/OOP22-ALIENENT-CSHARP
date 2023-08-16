@@ -1,57 +1,57 @@
-public class UserAccountImpl : UserAccountImpl
+public class UserAccountImpl : UserAccount
 {   
-    private string _nickname;
-    private int _money;
-    private int _highscore;
+    private string _nickname = "";
+    private int _money = 0;
+    private int _highscore = 0;
     private readonly Dictionary<string,int> _inventory;
-    private readonly Dictionary<Statistic,int> _toAddPwu
+    private Dictionary<Statistic,int> _toAddPwu;
     public UserAccountImpl(Dictionary<string,int> inventory, Dictionary<Statistic,int> toAddPwu)
     {
         _inventory = inventory;
         _toAddPwu = toAddPwu;
     }
 
-    int Money
+    public int Money
     {
         get => _money;
-        set => _money =  value;
+        set => _money +=  value;
     }
 
-    string Nickname
+    public string Nickname
     {
         get => _nickname;
         set => _nickname =  value;
     }
 
-    int Highscore
+    public int Highscore
     {
         get => _highscore;
         set => _highscore =  value;
     }
 
-    Dictionary<string,int> Inventory => _inventory;
-    Dictionary<Statistic,int> ToAddPwu => _toAddPwu;
+    public Dictionary<string,int> Inventory => _inventory;
+    public Dictionary<Statistic,int> ToAddPwu => _toAddPwu;
     
-    int GetCurrLevel(string id)
+    public int GetCurrLevel(string id)
     {
-       return _inventory.Item(id);
+       return _inventory[id];
     }
     
-    void UpdateInventory(string id)
+    public void UpdateInventory(string id)
     {
          _inventory[id] = _inventory.TryGetValue(id, out int existingvalue) ? existingvalue+1 :1;    
     }
    
-    void UpdateToAddPwu(Dictionary<Statistic, int> mapToAdd)
+    public void UpdateToAddPwu(Dictionary<Statistic, int> mapToAdd)
     {
         if ( _toAddPwu.Count() == 0 )
         {
-            _toAddPwu = new Dictionary<Statistic, int> mapToAdd;
+            _toAddPwu = new Dictionary<Statistic, int>(mapToAdd);
         } else
         {
             foreach(KeyValuePair<Statistic, int> entry in mapToAdd)
             {
-                _toAddPwu[entry.Key] = _toAddPwu.contains(entry.Key) ? _toAddPwu[entry.Key] + entry.Value : entry.Value;
+                _toAddPwu[entry.Key] = _toAddPwu.ContainsKey(entry.Key) ? _toAddPwu[entry.Key] + entry.Value : entry.Value;
             }
         }
  

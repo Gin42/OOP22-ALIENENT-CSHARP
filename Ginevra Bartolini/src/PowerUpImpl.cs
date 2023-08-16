@@ -1,32 +1,32 @@
 public class PowerUpImpl : PowerUp
 {
-    private string _id;
-    private int _cost;
-    private int _maxLevel;
+    private string _id = "";
+    private int _cost = 0;
+    private int _maxLevel = 0;
     private readonly Dictionary<Statistic, int> _statModifiers;
     public PowerUpImpl(Dictionary<Statistic, int> stat)
     {
         _statModifiers = stat;
     }
 
-    string Id
+    public string Id
     {
         get => _id;
         set => _id = value;
     }
 
-    int Cost
+    public int Cost
     {
         get => _cost;
         set => _cost = value;
     }
 
-    int getMaxLevel
+    public int getMaxLevel
     {
         get => _maxLevel;
         set => _maxLevel = value;
     }
 
-    Dictionary<Statistic, int> StatModifiers => _statModifiers;
+    public Dictionary<Statistic, int> StatModifiers => _statModifiers;
 
 }
