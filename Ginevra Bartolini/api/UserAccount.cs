@@ -6,19 +6,19 @@ public interface UserAccount
         set;
     }
 
-    string nickname
+    string Nickname
     {
         get;
         set;
     }
 
-    int highscore
+    int Highscore
     {
         get;
         set;
     }
 
-    Dictionary<string,int> inventory
+    Dictionary<string,int> Inventory
     {
         get;
     }
@@ -27,9 +27,9 @@ public interface UserAccount
         get;
     }
     
-    int getCurrLevel(String id);
+    int GetCurrLevel(string id);
     
-    void updateInventory(String id);
+    void UpdateInventory(string id);
    
-    void updateToAddPwu(Dictionary<Statistic, int> mapToAdd);
+    void UpdateToAddPwu(Dictionary<Statistic, int> mapToAdd);
 }
