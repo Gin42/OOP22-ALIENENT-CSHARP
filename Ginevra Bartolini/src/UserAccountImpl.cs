@@ -44,7 +44,7 @@ public class UserAccountImpl : UserAccount
    
     public void UpdateToAddPwu(Dictionary<Statistic, int> mapToAdd)
     {
-        if ( _toAddPwu.Count() == 0 )
+        if ( _toAddPwu.Count == 0 )
         {
             _toAddPwu = new Dictionary<Statistic, int>(mapToAdd);
         } else

@@ -1,3 +1,5 @@
+using YamlDotNet
+
 public class ShopControllerImpl : ShopController, InitController
 {
     private static readonly string YML = ".yml";
@@ -6,32 +8,57 @@ public class ShopControllerImpl : ShopController, InitController
     private static readonly string DIRYML = "/yaml";
     //private static readonly Logger LOGGER = LoggerFactory.getLogger(UserAccountHandlerImpl.class);
 
-    private Controller controller;
-    private UserAccount account;
-    private ShopModel model;
-    private List<PowerUp> powerUps = new List<>();   
+    private Controller _controller;
+    private UserAccount _account;
+    private ShopModel _model;
+    private List<PowerUp> _powerUps = new List<PowerUp>();   
 
-    public void init(Controller controller, Page page)
+    public void init(Controller controller, FakeScene scene)
     {
-        this.controller = controller;
-        this.account = controller.getUserAccount();
-        this.model = new ShopModelImpl(this.controller);
-        this.model.loadPwu(powerUps);
+        _controller = controller;
+        _account = _controller.Account;
+        _model = new ShopModelImpl(_controller);
+        _model.loadPwu(_powerUps);
     } 
     public UserAccount Account { 
-        get => account; 
+        get => _account; 
     }
     public List<PowerUp> Pwu { 
-        get => throw new NotImplementedException(); 
+        get => _powerUps;
     }
-
-    public bool buy(string id)
-    {
-        throw new NotImplementedException();
-    }
-
     public void loadPwuYaml()
     {
-        throw new NotImplementedException();
+         try (InputStream inputStream = getClass().getResourceAsStream(DIRYML + PWU + YML)) {
+
+            final Constructor constructor = new Constructor(PowerUpImpl.class, new LoaderOptions());
+            final TypeDescription accountDescription = new TypeDescription(PowerUpImpl.class);
+            accountDescription.addPropertyParameters("id", String.class);
+            accountDescription.addPropertyParameters("cost", Integer.class);
+            accountDescription.addPropertyParameters("maxLevel", Integer.class);
+            accountDescription.addPropertyParameters("statModifiers", Statistic.class, Integer.class);
+            constructor.addTypeDescription(accountDescription);
+
+            final Yaml yaml = new Yaml(constructor);
+            final Iterable<Object> documents = yaml.loadAll(inputStream);
+
+            for (final Object object : documents) {
+                powerUps.add((PowerUp) object);
+            }
+
+        } catch (IOException e) {
+            LOGGER.error("Could not open power ups file", e);
+        }
+    }
+
+        public bool buy(string id)
+    {
+        Nullable<int> changeMoney = _model.check(id);
+        if (changeMoney != null) {
+            _model.updateShop(id, changeMoney.Value);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

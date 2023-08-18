@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 public class ShopModelImpl : ShopModel
 {   
     private readonly Controller _controller;
@@ -19,21 +17,21 @@ public class ShopModelImpl : ShopModel
         UserAccount? user = _controller.Account;
         return _powerUps.AsEnumerable().Where(p => p.Id.Equals(id))
                 .Where(p => (user?.Money
-                        - (p.Cost) * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
-                .Select(p => -(p.Cost) * (_controller.Account?.GetCurrLevel(id) + 1)).FirstOrDefault();
+                        - p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
+                .Select(p => -p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)).FirstOrDefault();
     }
     public void updateShop(string id, int changeMoney)
     {
-        UserAccount? user = _controller.Account;
-        user?.UpdateInventory(id);
-        user?.Money = changeMoney;
+        UserAccount user = _controller.Account;
+        user.UpdateInventory(id);
+        user.Money = changeMoney;
         updateToAddPwu(id, user);
     }
 
-    private UserAccount updateToAddPwu(string id, UserAccount? user) {
+    private UserAccount updateToAddPwu(string id, UserAccount account) {
 
-        user?.UpdateToAddPwu(
-                _powerUps.AsEnumerable().Where(p -> p.Id.Equals(id)).Select(p -> p.StatModifiers).FirstOrDefault.get());
-        return user;
+        account.UpdateToAddPwu(
+                _powerUps.AsEnumerable().Where(p => p.Id.Equals(id, StringComparison.Ordinal)).Select(p => p.StatModifiers).FirstOrDefault());
+        return account;
     }
 }
