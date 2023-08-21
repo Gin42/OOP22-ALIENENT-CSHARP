@@ -1,8 +1,6 @@
 using System;
-using System.Drawing;
-using AlienEnt.Geometry;
 
-namespace Geometry
+namespace AlienEnt.Geometry
 {
     public class Line2D
     {

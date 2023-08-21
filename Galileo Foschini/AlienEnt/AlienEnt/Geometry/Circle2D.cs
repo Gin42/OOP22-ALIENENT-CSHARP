@@ -1,7 +1,6 @@
 using System;
-using AlienEnt.Geometry;
 
-namespace Geometry
+namespace AlienEnt.Geometry
 {
     public class Circle2D
     {
@@ -16,7 +15,7 @@ namespace Geometry
 
         public bool IntersectWith(Circle2D c) => Ray + c.Ray > Center.DistanceFrom(c.Center);
 
-        //public bool IntersectWhith(Line2D l) =>
+        public bool IntersectWhith(Line2D l) => Ray > l.DistancePoint(Center);
 
         public override string ToString()
         {
