@@ -25,14 +25,20 @@ namespace AlienEnt.Geometry
             return num / den;
         }
 
-        public override string ToString() => A + "x" + (B > 0 ? "+" : "") + B + "y" + (C > 0 ? "+" : "") + C;
+        public override string ToString() => A + "x" + (B >= 0 ? "+" : "") + B + "y" + (C >= 0 ? "+" : "") + C;
 
         public override bool Equals(object? obj)
         {
-            return obj is Line2D d &&
-                   A == d.A &&
-                   B == d.B &&
-                   C == d.C;
+            if(obj?.GetType() != typeof(Line2D))
+                return false;
+
+            Line2D line = (Line2D)obj;
+            if (B == 0 && line.B == 0)
+            {
+                return C / A == line.C / line.A;
+            }
+            return A / B == line.A / line.B
+                    && C / B == line.C / line.B;
         }
 
         public override int GetHashCode() => HashCode.Combine(A, B, C);
