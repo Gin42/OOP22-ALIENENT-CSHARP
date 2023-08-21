@@ -26,6 +26,22 @@ namespace AlienEnt.Geometry
 
         public Vector2D Mul(double a) => FromAngleAndModule(Angle, Module * a);
 
+        public override string ToString() => $"Vector2D[Angle = {Angle}; Module = {Module}]";
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Vector2D d &&
+                   Module == d.Module &&
+                   Angle == d.Angle &&
+                   XComp == d.XComp &&
+                   YComp == d.YComp;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Module, Angle, XComp, YComp);
+        }
+
         public static Vector2D FromAngleAndModule(double angle, double module) => new(angle, module);
 
         public static Vector2D FromComponents(double xComp, double yComp)
