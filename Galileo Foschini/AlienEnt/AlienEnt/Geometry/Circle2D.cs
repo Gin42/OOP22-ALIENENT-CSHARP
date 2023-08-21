@@ -30,9 +30,6 @@ namespace Geometry
                    Ray == d.Ray;
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Center, Ray);
-        }
+        public override int GetHashCode() => HashCode.Combine(Center, Ray);
     }
 }

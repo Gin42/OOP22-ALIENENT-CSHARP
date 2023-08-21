@@ -37,10 +37,7 @@ namespace AlienEnt.Geometry
                    YComp == d.YComp;
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Module, Angle, XComp, YComp);
-        }
+        public override int GetHashCode() => HashCode.Combine(Module, Angle);
 
         public static Vector2D FromAngleAndModule(double angle, double module) => new(angle, module);
 

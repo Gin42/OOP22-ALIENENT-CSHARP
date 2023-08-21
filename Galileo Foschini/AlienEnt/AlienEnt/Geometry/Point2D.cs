@@ -24,10 +24,7 @@ namespace AlienEnt.Geometry
                    Y == d.Y;
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(X, Y);
-        }
+        public override int GetHashCode() => HashCode.Combine(X, Y);
 
         public static readonly Point2D ORIGIN = new(0, 0);
     }
