@@ -15,11 +15,16 @@ namespace GameObject{
         public Vector2D Velocity{ get; set; }
 
         /// <summary>
+        /// The identifier of the object
+        /// </summary>
+        public string Id{ get;}
+
+        /// <summary>
         /// Return the input stat value.
         /// </summary>
         /// <param name="stat">the statistic whose value you want.</param>
         /// <returns>int of the input stat value</returns>
-        int GetStatValue(Statistic stat);
+        int? GetStatValue(Statistic stat);
         
         /// <summary>
         /// return if the object is alive.
@@ -92,12 +97,6 @@ namespace GameObject{
         /// </summary>
         /// <param name="deltatime">Time passed since the last cycle.</param>
         void Recovery(double deltatime);
-
-        /// <summary>
-        /// Return the Id of the object.
-        /// </summary>
-        /// <returns>the Id</returns>
-        string GetId();
 
         /// <summary>
         /// Update the game object.
