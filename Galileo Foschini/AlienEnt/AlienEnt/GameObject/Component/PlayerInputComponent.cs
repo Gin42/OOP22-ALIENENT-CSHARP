@@ -4,6 +4,10 @@ using AlienEnt.Geometry;
 
 namespace AlienEnt.GameObject.Component
 {
+    /// <summary>
+    /// PlayerInputComponent
+    /// Handle the movements of the player.
+    /// </summary>
     public class PlayerInputComponent : AbstractComponent, IPlayerInputComponent
     {
         private const double ANG_VEL = 360;
@@ -14,15 +18,22 @@ namespace AlienEnt.GameObject.Component
         private int _maxSpeed;
         private double _acc;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <param name="input"></param>
         public PlayerInputComponent(IGameObject gameObject, IInputSupplier input) : base(gameObject, true)
         {
             InputSupplier = input;
         }
 
+        /// <inheritdoc/>
         public IInputSupplier InputSupplier { get; set; }
-
+        /// <inheritdoc/>
         public IShooterComponent? ShooterComponent => _shooter;
-
+        
+        /// <inheritdoc/>
         public override void Start()
         {
             _maxSpeed = GetGameObject().GetStatValue(Statistic.SPEED) ?? 0;
@@ -30,6 +41,7 @@ namespace AlienEnt.GameObject.Component
             _shooter = GetGameObject().GetComponent<IShooterComponent>();
         }
 
+        /// <inheritdoc/>
         public override void Update(double deltaTime)
         {
             Vector2D vel = GetGameObject().Velocity;
@@ -73,6 +85,7 @@ namespace AlienEnt.GameObject.Component
             }
         }
 
+        /// <inheritdoc/>
         public override IComponent? Duplicate(IGameObject obj)
         {
             Type type = InputSupplier.GetType();
