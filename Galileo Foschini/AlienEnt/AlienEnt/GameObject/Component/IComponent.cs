@@ -1,4 +1,4 @@
-namespace GameObject.Component
+namespace AlienEnt.GameObject.Component
 {
     public interface IComponent
     {

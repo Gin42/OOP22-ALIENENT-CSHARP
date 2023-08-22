@@ -1,4 +1,4 @@
-namespace GameObject
+namespace AlienEnt.GameObject
 {
     public enum Statistic
     {
