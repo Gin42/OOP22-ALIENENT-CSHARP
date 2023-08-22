@@ -7,7 +7,7 @@ namespace AlienEnt.GameObject
     {
 
         private readonly Dictionary<Statistic, int> _stats;
-        private readonly List<IComponent> _components;
+        private readonly ISet<IComponent> _components;
 
         private int _hp;
         private double _recoveryCooldown = 0;
@@ -25,7 +25,7 @@ namespace AlienEnt.GameObject
             Velocity = velocity;
             _stats = new Dictionary<Statistic, int>(stats);
             Id = id;
-            _components = new List<IComponent>();
+            _components = new HashSet<IComponent>();
             if (!_stats.TryGetValue(Statistic.HP, out _hp))
                 _hp = 0;
         }
@@ -40,7 +40,7 @@ namespace AlienEnt.GameObject
         /// <inheritdoc/>
         public void AddAllComponents(ICollection<IComponent> components)
         {
-            _components.AddRange(components);
+            _components.UnionWith(components);
         }
 
         /// <inheritdoc/>
@@ -50,9 +50,9 @@ namespace AlienEnt.GameObject
         }
 
         /// <inheritdoc/>
-        public List<IComponent> GetAllComponents()
+        public ISet<IComponent> GetAllComponents()
         {
-            return new List<IComponent>(_components);
+            return new HashSet<IComponent>(_components);
         }
 
         /// <inheritdoc/>
@@ -114,7 +114,7 @@ namespace AlienEnt.GameObject
             if (!_stats.TryAdd(stat, value))
                 _stats[stat] = value;
         }
-        
+
         /// <inheritdoc/>
         public void Update(double deltaTime)
         {

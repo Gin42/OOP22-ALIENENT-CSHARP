@@ -47,7 +47,7 @@ namespace AlienEnt.GameObject{
         /// return a list of all components.
         /// </summary>
         /// <returns>a list with all the objects component</returns>
-        List<IComponent> GetAllComponents();
+        ISet<IComponent> GetAllComponents();
 
         /// <summary>
         /// return the stats dictionary.
