@@ -9,6 +9,8 @@ namespace AlienEnt.Geometry
         private const int POSITIVE_RIGHT = 90;
         private const int NEGATIVE_RIGHT = 270;
 
+        public static readonly Vector2D NULL_VECTOR = new(0,0);
+
         private Vector2D(double angle, double module)
         {
             Angle = ConfineAngle(angle);

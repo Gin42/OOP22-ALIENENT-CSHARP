@@ -41,7 +41,7 @@ namespace AlienEnt.GameObject.Component
             if(!IsEnabled())
                 return;
             if(_counter < _delay)
-                _counter += _delay;
+                _counter += deltaTime;
             if(_trigger && _counter >= _delay)
             {
                 var p = ProjectileSupplier();
