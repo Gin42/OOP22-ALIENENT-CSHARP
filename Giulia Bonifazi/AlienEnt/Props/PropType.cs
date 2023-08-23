@@ -1,4 +1,4 @@
-namespace Props 
+namespace AlienEnt.Props 
 {
     public enum PropType {
         BOUNDARY,

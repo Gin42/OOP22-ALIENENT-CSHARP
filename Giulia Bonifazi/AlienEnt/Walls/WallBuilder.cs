@@ -1,7 +1,7 @@
-using Commons;
-using Props;
+using AlienEnt.Commons;
+using AlienEnt.Props;
 
-namespace Walls
+namespace AlienEnt.Walls
 {
     public class WallBuilder : IWallBuilder
     {

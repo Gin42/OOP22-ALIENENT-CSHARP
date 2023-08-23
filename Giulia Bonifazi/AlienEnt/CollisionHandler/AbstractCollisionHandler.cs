@@ -1,11 +1,11 @@
-using Props;
+using AlienEnt.Props;
 
-namespace CollisionHandler {
-    public abstract class CollisionHandler : ICollisionHandler 
+namespace AlienEnt.CollisionHandler {
+    public abstract class AbstractCollisionHandler : ICollisionHandler 
     {
         private readonly IList<PropHitbox> _collidables;
 
-        public CollisionHandler () 
+        public AbstractCollisionHandler () 
         {
             _collidables = new List<PropHitbox>(); 
         }

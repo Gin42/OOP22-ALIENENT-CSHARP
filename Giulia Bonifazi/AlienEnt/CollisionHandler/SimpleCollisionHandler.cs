@@ -1,7 +1,7 @@
-using Props;
+using AlienEnt.Props;
 
-namespace CollisionHandler {
-    public class SimpleCollisionHandler : CollisionHandler
+namespace AlienEnt.CollisionHandler {
+    public class SimpleCollisionHandler : AbstractCollisionHandler
     {
         protected override void CheckPair(PropHitbox a, PropHitbox b)
         {

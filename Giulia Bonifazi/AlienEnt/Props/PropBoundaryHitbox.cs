@@ -1,7 +1,7 @@
 using System.Drawing;
-using Commons;
+using AlienEnt.Commons;
 
-namespace Props {
+namespace AlienEnt.Props {
     public class PropBoundaryHitbox : PropHitbox
     {
 

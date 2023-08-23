@@ -1,7 +1,6 @@
-using System.Net.NetworkInformation;
-using Commons;
+using AlienEnt.Commons;
 
-namespace Props{
+namespace AlienEnt.Props{
     public class PropGameObject { 
 
         public bool IsAlive { 

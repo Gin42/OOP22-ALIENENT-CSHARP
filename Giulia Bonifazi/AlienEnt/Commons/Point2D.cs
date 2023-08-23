@@ -1,4 +1,4 @@
-namespace Commons {
+namespace AlienEnt.Commons {
 
     public class Point2D {
 

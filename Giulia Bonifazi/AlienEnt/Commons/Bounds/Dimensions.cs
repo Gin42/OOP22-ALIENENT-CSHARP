@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Commons.Bounds
+namespace AlienEnt.Commons.Bounds
 {
     public class Dimensions : IDimensions
     {

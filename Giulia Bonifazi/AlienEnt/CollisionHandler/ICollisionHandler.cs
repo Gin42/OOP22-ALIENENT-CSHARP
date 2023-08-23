@@ -1,6 +1,6 @@
-using Props;
+using AlienEnt.Props;
 
-namespace CollisionHandler {
+namespace AlienEnt.CollisionHandler {
     public interface ICollisionHandler {
 
         void CheckCollisions();

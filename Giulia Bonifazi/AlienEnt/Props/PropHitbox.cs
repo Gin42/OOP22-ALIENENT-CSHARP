@@ -1,7 +1,6 @@
-using System.Drawing;
-using Commons;
+using AlienEnt.Commons;
 
-namespace Props {
+namespace AlienEnt.Props {
     public class PropHitbox {
         private readonly PropGameObject _gameObject;
         public Point2D Mov {get; set;}

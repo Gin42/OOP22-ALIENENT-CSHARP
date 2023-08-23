@@ -1,7 +1,7 @@
-using Commons.Bounds;
-using Props;
+using AlienEnt.Commons.Bounds;
+using AlienEnt.Props;
 
-namespace World {
+namespace AlienEnt.GameWorld {
     public interface IWorld {
         IDimensions Dimensions { get; }
         ISet<PropGameObject> LastAdded { get; }

@@ -1,24 +1,35 @@
 using System.ComponentModel;
-using System.Drawing;
-using CollisionHandler;
-using Commons;
-using Commons.Bounds;
-using Commons.Buffer;
-using Props;
-using Walls;
+using AlienEnt.CollisionHandler;
+using AlienEnt.Commons;
+using AlienEnt.Commons.Bounds;
+using AlienEnt.Commons.Buffer;
+using AlienEnt.GameWorld;
+using AlienEnt.Props;
+using AlienEnt.Walls;
 
-namespace World {
+namespace AlienEnt.GameWorld 
+{
     public sealed class World : IWorld
     {
         private readonly static IWallBuilder s_wallBuilder = new WallBuilder();
         private readonly static string[] s_givesScore = {"enemy"};
         private readonly ICollisionHandler _collisionHandler;
         private readonly IDoubleBuffer<PropGameObject> _doubleBuffer;
-        private ISet<PropGameObject> _lastAdded;
+        private readonly ISet<PropGameObject> _lastAdded;
+
+        public World (IDimensions dimensions) {
+            Dimensions = dimensions;
+            _lastAdded = new HashSet<PropGameObject>();
+            _doubleBuffer = new DoubleBuffer<PropGameObject>();
+            _collisionHandler = new SimpleCollisionHandler();
+            CreateWalls();
+        }
+
         public IDimensions Dimensions { get; private set;}
         public ISet<PropGameObject> LastAdded 
         { 
-            get {
+            get 
+            {
                 var ret = new HashSet<PropGameObject>(_lastAdded);
                 _lastAdded.Clear();
                 return ret;
@@ -30,14 +41,6 @@ namespace World {
         public int Score { private set; get; }
         [DefaultValue(0)]
         public int EnemyCount { private set; get; }
-
-        public World (Dimensions dimensions) {
-            Dimensions = dimensions;
-            _lastAdded = new HashSet<PropGameObject>();
-            _doubleBuffer = new DoubleBuffer<PropGameObject>();
-            _collisionHandler = new SimpleCollisionHandler();
-            CreateWalls();
-        }
 
         public void AddAllGameObjects(params PropGameObject[] obj)
         {

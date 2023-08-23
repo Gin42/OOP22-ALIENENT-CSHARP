@@ -1,6 +1,8 @@
-namespace Commons.Buffer {
+namespace AlienEnt.Commons.Buffer 
+{
     // DoubleBuffer interface.
-    public interface IDoubleBuffer<T> {
+    public interface IDoubleBuffer<T> 
+    {
         ISet<T> Buffer {get;}
         ISet<T> Current {get;}
 
