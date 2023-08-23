@@ -1,5 +1,8 @@
 namespace AlienEnt.GameObject.Component.Api
 {
+    /// <summary>
+    /// Models a component for a game object.
+    /// </summary>
     public interface IComponent
     {
         /// <summary>

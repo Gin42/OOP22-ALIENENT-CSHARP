@@ -9,7 +9,7 @@ namespace AlienEnt.GameObject
     public class GameObject : IGameObject
     {
 
-        private readonly Dictionary<Statistic, int> _stats;
+        private readonly IDictionary<Statistic, int> _stats;
         private readonly ISet<IComponent> _components;
 
         private int _hp;
@@ -59,7 +59,7 @@ namespace AlienEnt.GameObject
         }
 
         /// <inheritdoc/>
-        public Dictionary<Statistic, int> GetAllStats()
+        public IDictionary<Statistic, int> GetAllStats()
         {
             return new Dictionary<Statistic, int>(_stats);
         }
@@ -81,7 +81,7 @@ namespace AlienEnt.GameObject
         public void Heal(int heal)
         {
             if (heal < 0)
-                throw new ArgumentOutOfRangeException("the healing value must be positive");
+                throw new ArgumentOutOfRangeException($"the value {heal} is not valid for the heal method");
             _hp += heal;
         }
 
@@ -89,7 +89,7 @@ namespace AlienEnt.GameObject
         public void Hit(int damage)
         {
             if (damage < 0)
-                throw new ArgumentOutOfRangeException("the damage value must be positive");
+                throw new ArgumentOutOfRangeException($"the value {damage} is not valid for the hit method");
             _hp -= damage;
         }
 
