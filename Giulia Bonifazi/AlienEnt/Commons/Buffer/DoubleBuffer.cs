@@ -2,7 +2,7 @@
 namespace AlienEnt.Commons.Buffer {
 
     // Implementation of the DoubleBuffer interface.
-    class DoubleBuffer<T> : IDoubleBuffer<T>
+    public class DoubleBuffer<T> : IDoubleBuffer<T>
     {
         public DoubleBuffer() 
         {
