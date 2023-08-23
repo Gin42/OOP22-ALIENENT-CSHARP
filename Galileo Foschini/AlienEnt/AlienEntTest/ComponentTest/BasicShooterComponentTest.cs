@@ -75,6 +75,9 @@ namespace AlienEntTest.ComponentTest
             Assert.AreEqual(10, projectile.GetStatValue(Statistic.DAMAGE));
             Assert.AreEqual(20, projectile.GetStatValue(Statistic.SPEED));
 
+            Assert.AreEqual(_ship.Position, projectile.Position);
+            Assert.AreEqual(Vector2D.FromAngleAndModule(90, 20), projectile.Velocity);
+
             var hb = projectile.GetComponent<IProjectileHitboxComponent>();
             Assert.IsNotNull(hb);
             Assert.AreEqual(IHitboxComponent.GameObjectType.PLAYER, hb.ShooterType);

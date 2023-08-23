@@ -83,6 +83,10 @@ namespace AlienEnt.GameObject.Component
                         break;
                 }
             }
+            InputSupplier.ClearInputs();
+
+            GetGameObject().Position = vel.Mul(deltaTime).Translate(GetGameObject().Position);
+            GetGameObject().Velocity = vel;
         }
 
         /// <inheritdoc/>
