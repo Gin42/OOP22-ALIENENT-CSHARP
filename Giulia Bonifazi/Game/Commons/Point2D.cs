@@ -8,7 +8,7 @@ namespace Commons {
             get => new(0.0, 0.0);
         }
 
-        Point2D (double x, double y) {
+        public Point2D (double x, double y) {
             X = x;
             Y = y;
         }

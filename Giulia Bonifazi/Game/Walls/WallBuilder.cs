@@ -46,7 +46,7 @@ namespace Walls
             _hitbox = null;
         }
 
-        public PropGameObject getWall()
+        public PropGameObject GetWall()
         {
             return _gameObject;
         }

@@ -17,7 +17,7 @@ namespace Walls
 
         void SetLocation(PropBoundaryHitbox.Locations location);
 
-        PropGameObject getWall();
+        PropGameObject GetWall();
 
         void Clear();
     }
