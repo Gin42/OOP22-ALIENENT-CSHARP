@@ -1,7 +1,7 @@
-namespace AlienEnt.GameObject.Component
+namespace AlienEnt.GameObject.Component.Api
 {
     public interface IProjectileHitboxComponent : IHitboxComponent
     {
-        GameObjectType ShooterType { get; set;}
+        GameObjectType ShooterType { get; set; }
     }
 }

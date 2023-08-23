@@ -1,4 +1,5 @@
 using System.Numerics;
+using AlienEnt.GameObject.Component.Api;
 using AlienEnt.Geometry;
 
 namespace AlienEnt.GameObject.Component

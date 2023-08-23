@@ -1,5 +1,5 @@
 using AlienEnt.Geometry;
-using AlienEnt.GameObject.Component;
+using AlienEnt.GameObject.Component.Api;
 
 namespace AlienEnt.GameObject
 {

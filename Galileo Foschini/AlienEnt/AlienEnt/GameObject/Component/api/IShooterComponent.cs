@@ -1,11 +1,11 @@
-namespace AlienEnt.GameObject.Component
+namespace AlienEnt.GameObject.Component.Api
 {
     public interface IShooterComponent : IComponent
     {
         /// <summary>
         /// The Source that creates the projectiles
         /// </summary>
-        Func<IGameObject> ProjectileSupplier{get; set;}
+        Func<IGameObject> ProjectileSupplier { get; set; }
 
         /// <summary>
         /// Tell the component that it should shoot

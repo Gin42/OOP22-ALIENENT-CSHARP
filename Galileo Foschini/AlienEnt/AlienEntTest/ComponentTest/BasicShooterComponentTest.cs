@@ -1,5 +1,6 @@
 using AlienEnt.GameObject;
 using AlienEnt.GameObject.Component;
+using AlienEnt.GameObject.Component.Api;
 using AlienEnt.Geometry;
 
 namespace AlienEntTest.ComponentTest

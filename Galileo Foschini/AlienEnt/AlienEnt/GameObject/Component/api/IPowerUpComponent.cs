@@ -1,4 +1,4 @@
-namespace AlienEnt.GameObject.Component
+namespace AlienEnt.GameObject.Component.Api
 {
     /// <summary>
     /// The component that have the job of updating the stats of a GameObject.

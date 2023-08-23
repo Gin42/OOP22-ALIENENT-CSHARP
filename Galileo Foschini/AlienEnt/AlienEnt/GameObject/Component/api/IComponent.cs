@@ -1,4 +1,4 @@
-namespace AlienEnt.GameObject.Component
+namespace AlienEnt.GameObject.Component.Api
 {
     public interface IComponent
     {

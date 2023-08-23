@@ -1,8 +1,9 @@
 using System.IO.Compression;
 using AlienEnt.Geometry;
-using AlienEnt.GameObject.Component;
+using AlienEnt.GameObject.Component.Api;
 
-namespace AlienEnt.GameObject{
+namespace AlienEnt.GameObject
+{
     public interface IGameObject
     {
         /// <summary>

@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
+using AlienEnt.GameObject.Component.Api;
 using AlienEnt.Geometry;
 
 namespace AlienEnt.GameObject.Component

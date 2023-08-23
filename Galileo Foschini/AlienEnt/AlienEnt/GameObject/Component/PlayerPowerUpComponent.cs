@@ -1,3 +1,5 @@
+using AlienEnt.GameObject.Component.Api;
+
 namespace AlienEnt.GameObject.Component
 {
     public class PlayerPowerUpComponent : AbstractComponent, IPowerUpComponent
