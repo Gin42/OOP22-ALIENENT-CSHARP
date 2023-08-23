@@ -17,7 +17,7 @@ namespace AlienEnt.GameObject.Component
         }
         
         /// <inheritdoc/>
-        public void SetPowerUps(Dictionary<Statistic, int> powerUps)
+        public void SetPowerUps(IDictionary<Statistic, int> powerUps)
         {
             double mod;
             int? oldStat;

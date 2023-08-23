@@ -4,21 +4,24 @@ using AlienEnt.GameObject.Component.Api;
 
 namespace AlienEnt.GameObject
 {
+    /// <summary>
+    /// Models every object in the game map.
+    /// </summary>
     public interface IGameObject
     {
         /// <summary>
         /// The Position of the GameObject on the map
         /// </summary>
-        public Point2D Position{ get; set; }
+        Point2D Position{ get; set; }
         /// <summary>
         /// The actual Velocity of the GameObject
         /// </summary>
-        public Vector2D Velocity{ get; set; }
+        Vector2D Velocity{ get; set; }
 
         /// <summary>
         /// The identifier of the object
         /// </summary>
-        public string Id{ get;}
+        string Id{ get;}
 
         /// <summary>
         /// Return the input stat value.
@@ -54,7 +57,7 @@ namespace AlienEnt.GameObject
         /// return the stats dictionary.
         /// </summary>
         /// <returns>a dictionary with value of all stats</returns>
-        Dictionary<Statistic,int> GetAllStats();
+        IDictionary<Statistic,int> GetAllStats();
 
         /// <summary>
         /// Set the value of the given stat.

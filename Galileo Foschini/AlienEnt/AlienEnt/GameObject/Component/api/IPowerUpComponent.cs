@@ -9,6 +9,6 @@ namespace AlienEnt.GameObject.Component.Api
         /// Set the modifiers that will be applied to the statistics of the GameObject.
         /// </summary>
         /// <param name="powerUps"></param>
-        void SetPowerUps(Dictionary<Statistic, int> powerUps);
+        void SetPowerUps(IDictionary<Statistic, int> powerUps);
     }
 }

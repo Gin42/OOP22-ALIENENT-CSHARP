@@ -1,11 +1,23 @@
 namespace AlienEnt.GameObject.Component.Api
 {
+    /// <summary>
+    /// Basic implementation of Component
+    /// </summary>
     public abstract class AbstractComponent : IComponent
     {
         private readonly IGameObject _gameObject;
 
         private bool _isEnabled;
 
+        /// <summary>
+        /// Set up the base for a component.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <param name="IsEnabled">
+        ///  the initial state of the component
+        ///  ( true = enabled, false = disabled)
+        ///  Not all components can be disabled
+        /// </param>
         public AbstractComponent(IGameObject gameObject, bool IsEnabled)
         {
             _gameObject = gameObject;

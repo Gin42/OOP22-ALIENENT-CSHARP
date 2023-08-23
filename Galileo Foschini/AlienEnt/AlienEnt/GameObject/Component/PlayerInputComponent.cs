@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using AlienEnt.GameObject.Component.Api;
 using AlienEnt.Geometry;
+using static AlienEnt.GameObject.IInputSupplier;
 
 namespace AlienEnt.GameObject.Component
 {
@@ -46,7 +47,7 @@ namespace AlienEnt.GameObject.Component
         public override void Update(double deltaTime)
         {
             Vector2D vel = GetGameObject().Velocity;
-            foreach(var input in InputSupplier.GetInputs())
+            foreach(var input in Enumerable.OrderBy<Input, int>(InputSupplier.GetInputs(), (i) => (int)i))
             {
                 double module = vel.Module;
                 switch (input)
