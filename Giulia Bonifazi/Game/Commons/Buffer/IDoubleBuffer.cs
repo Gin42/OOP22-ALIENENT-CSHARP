@@ -1,4 +1,4 @@
-namespace Buffer {
+namespace Commons.Buffer {
     // DoubleBuffer interface.
     public interface IDoubleBuffer<T> {
         ISet<T> Buffer {get;}

@@ -1,5 +1,5 @@
 
-namespace Buffer {
+namespace Commons.Buffer {
 
     // Implementation of the DoubleBuffer interface.
     class DoubleBuffer<T> : IDoubleBuffer<T>
