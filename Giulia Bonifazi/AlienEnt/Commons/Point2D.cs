@@ -1,6 +1,7 @@
 namespace AlienEnt.Commons {
 
-    public class Point2D {
+    public class Point2D
+    {
 
         public Point2D (double x, double y) {
             X = x;
@@ -13,5 +14,19 @@ namespace AlienEnt.Commons {
         {
             get => new(0.0, 0.0);
         }
+
+        public bool IsSame(object? otherItem)
+        {
+            if (otherItem is Point2D)
+            {
+                var item = otherItem as Point2D;
+                if (item?.X == X && item?.Y == Y)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

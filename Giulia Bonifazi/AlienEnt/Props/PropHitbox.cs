@@ -21,20 +21,17 @@ namespace AlienEnt.Props
         {
             _gameObject.Pos.X += Mov.X;
             _gameObject.Pos.Y += Mov.Y;
-            if (HasCollided)
-            {
-                _gameObject.Hp = 0;
-            }
         }
 
         public void Collide(PropHitbox hb) 
         {
-            if (hb.GetPos().Equals(_gameObject.Pos)) {
+            if (hb.GetPos().IsSame(_gameObject.Pos)) {
                 HasCollided = true;
+                _gameObject.Hp = 0;
             }
         }
 
-        public Point2D GetPos()
+        protected Point2D GetPos()
         {
             return _gameObject.Pos;
         }
