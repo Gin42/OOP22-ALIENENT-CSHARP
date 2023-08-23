@@ -4,6 +4,9 @@ using AlienEnt.Geometry;
 
 namespace AlienEnt.GameObject.Component
 {
+    /// <summary>
+    /// A simple implementation of ShooterComponent.
+    /// </summary>
     public class BasicShooterComponent : AbstractComponent, IShooterComponent
     {
 
@@ -16,17 +19,27 @@ namespace AlienEnt.GameObject.Component
 
         private bool _trigger;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameObject">the referenced object</param>
+        /// <param name="enabled">if the component must be enabled</param>
+        /// <param name="shot">the supplier of the projectiles</param>
         public BasicShooterComponent(IGameObject gameObject, bool enabled, Func<IGameObject> shot) : base(gameObject, enabled)
         {
             ProjectileSupplier = shot;
         }
+
+        /// <inheritdoc/>
         public Func<IGameObject> ProjectileSupplier { get; set; }
 
+        /// <inheritdoc/>
         public void Shoot()
         {
             _trigger = true;
         }
 
+        /// <inheritdoc/>
         public override void Start()
         {
             var obj = GetGameObject();
@@ -36,7 +49,8 @@ namespace AlienEnt.GameObject.Component
             _type = obj.GetComponent<IHitboxComponent>()?.ObjectType ?? 
                     throw new NullReferenceException("The object doesn't posses an hitbox");
         }
-
+        
+        /// <inheritdoc/>
         public override void Update(double deltaTime)
         {
             if(!IsEnabled())
@@ -60,6 +74,7 @@ namespace AlienEnt.GameObject.Component
             _trigger = false;
         }
 
+        /// <inheritdoc/>
         public override IComponent? Duplicate(IGameObject obj) => new BasicShooterComponent(obj, false, ProjectileSupplier);
     }
 }

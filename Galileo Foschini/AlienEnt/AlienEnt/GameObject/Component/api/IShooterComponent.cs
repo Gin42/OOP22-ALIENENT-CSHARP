@@ -1,5 +1,8 @@
 namespace AlienEnt.GameObject.Component.Api
 {
+    /// <summary>
+    /// ShooterComponent.
+    /// </summary>
     public interface IShooterComponent : IComponent
     {
         /// <summary>

@@ -2,13 +2,21 @@ using AlienEnt.GameObject.Component.Api;
 
 namespace AlienEnt.GameObject.Component
 {
+    /// <summary>
+    /// A class created to apply PowerUps to Players or other GameObjects.
+    /// </summary>
     public class PlayerPowerUpComponent : AbstractComponent, IPowerUpComponent
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameObject"></param>
         public PlayerPowerUpComponent(IGameObject gameObject) : base(gameObject, false)
         {
 
         }
-
+        
+        /// <inheritdoc/>
         public void SetPowerUps(Dictionary<Statistic, int> powerUps)
         {
             double mod;
@@ -27,6 +35,7 @@ namespace AlienEnt.GameObject.Component
                 GetGameObject().Hit(-newHp);
         }
 
+        /// <inheritdoc/>
         public override IComponent? Duplicate(IGameObject obj)
         {
             var ret = new PlayerPowerUpComponent(obj);

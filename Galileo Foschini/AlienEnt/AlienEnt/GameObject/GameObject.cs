@@ -3,6 +3,9 @@ using AlienEnt.GameObject.Component.Api;
 
 namespace AlienEnt.GameObject
 {
+    /// <summary>
+    /// Implements methods common to all objects.
+    /// </summary>
     public class GameObject : IGameObject
     {
 

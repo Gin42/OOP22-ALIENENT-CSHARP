@@ -1,15 +1,21 @@
 namespace AlienEnt.GameObject
 {
+    /// <summary>
+    /// InputSupplier.
+    /// </summary>
     public interface IInputSupplier
     {
+        /// <summary>
+        /// An enum that descibes the Inputs that can be given through an InputSupplier.
+        /// </summary>
         enum Input
         {
-        ACCELERATE,
-        STOP_ACCELERATE,
-        TURN_LEFT,
-        TURN_RIGHT,
-        SHOOT,
-        NOTHING
+            ACCELERATE,
+            STOP_ACCELERATE,
+            TURN_LEFT,
+            TURN_RIGHT,
+            SHOOT,
+            NOTHING
         }
 
         /// <summary>
