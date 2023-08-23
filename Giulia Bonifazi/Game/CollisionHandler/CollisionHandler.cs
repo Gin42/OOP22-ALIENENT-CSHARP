@@ -10,19 +10,19 @@ namespace CollisionHandler {
             _collidables = new List<PropHitbox>(); 
         }
 
-        public void addHitbox(PropHitbox toAdd)
+        public void AddHitbox(PropHitbox? toAdd)
         {
             if(toAdd != null) {
                 _collidables.Add(toAdd);
             }
         }
 
-        public void checkCollisions()
+        public void CheckCollisions()
         {
             RecCheck(_collidables, 0);
         }
 
-        public void removeHitbox(PropHitbox? toRemove)
+        public void RemoveHitbox(PropHitbox? toRemove)
         {
             if(toRemove != null) {
                 _collidables.Remove(toRemove);

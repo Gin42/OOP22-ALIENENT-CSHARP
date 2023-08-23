@@ -3,10 +3,10 @@ using Props;
 namespace CollisionHandler {
     public interface ICollisionHandler {
 
-        void checkCollisions();
+        void CheckCollisions();
 
-        void addHitbox(PropHitbox toAdd);
+        void AddHitbox(PropHitbox? toAdd);
 
-        void removeHitbox(PropHitbox toRemove);
+        void RemoveHitbox(PropHitbox? toRemove);
     }
 }
