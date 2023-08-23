@@ -4,7 +4,7 @@ namespace AlienEnt.GameObject.Component
 {
     public class PlayerPowerUpComponent : AbstractComponent, IPowerUpComponent
     {
-        public PlayerPowerUpComponent(GameObject gameObject) : base(gameObject, false)
+        public PlayerPowerUpComponent(IGameObject gameObject) : base(gameObject, false)
         {
 
         }
@@ -24,12 +24,13 @@ namespace AlienEnt.GameObject.Component
             if(newHp > 0)
                 GetGameObject().Heal(newHp);
             else
-                GetGameObject().Hit(newHp);
+                GetGameObject().Hit(-newHp);
         }
 
         public override IComponent? Duplicate(IGameObject obj)
         {
-            throw new NotImplementedException();
+            var ret = new PlayerPowerUpComponent(obj);
+            return ret;
         }
     }
 }
