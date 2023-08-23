@@ -1,5 +1,4 @@
 using AlienentShop.Api;
-using YamlDotNet.Serialization;
 
 namespace AlienentShop.Impl
 {
@@ -14,6 +13,7 @@ namespace AlienentShop.Impl
         {
             
         }
+        
         public string Id
         {
             get => _id;

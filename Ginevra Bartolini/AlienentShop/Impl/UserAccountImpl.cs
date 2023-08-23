@@ -9,8 +9,8 @@ namespace AlienentShop.Impl
         private int _highscore = 0;
         private Dictionary<string,int> _inventory =  new();
         private Dictionary<IStatistic,int> _toAddPwu = new();
-        
-        public UserAccountImpl (string nickname) {
+
+        public UserAccountImpl(string nickname) {
             _nickname = nickname;
             _money = 0;
             _highscore = 0;
@@ -25,24 +25,39 @@ namespace AlienentShop.Impl
         public string Nickname
         {
             get => _nickname;
-            set => _nickname =  value;
+            set => _nickname = value;
         }
 
         public int Highscore
         {
             get => _highscore;
-            set => _highscore =  value;
+            set => _highscore = value;
         }
 
         public Dictionary<string, int> Inventory
         { 
             get => _inventory; 
-            set => _inventory = value; 
+            set
+            {
+                _inventory.Clear();
+                foreach (var s in value)
+                {
+                    _inventory.Add(s.Key, s.Value);
+                }
+            }
         }
+
         public Dictionary<IStatistic, int> ToAddPwu
         { 
             get => _toAddPwu;
-            set => _toAddPwu = value; 
+            set
+            {
+                _toAddPwu.Clear();
+                foreach (var s in value)
+                {
+                    _toAddPwu.Add(s.Key, s.Value);
+                }
+            } 
         }
 
         public int GetCurrLevel(string id)
@@ -52,17 +67,17 @@ namespace AlienentShop.Impl
         
         public void UpdateInventory(string id)
         {
-            _inventory[id] = _inventory.TryGetValue(id, out int existingvalue) ? existingvalue+1 :1;    
+            _inventory[id] = _inventory.ContainsKey(id) ? _inventory[id] + 1 : 1;    
         }
     
         public void UpdateToAddPwu(Dictionary<IStatistic, int> mapToAdd)
         {
-            if ( _toAddPwu.Count == 0 )
+            if (_toAddPwu.Count == 0)
             {
                 _toAddPwu = new Dictionary<IStatistic, int>(mapToAdd);
             } else
             {
-                foreach(KeyValuePair<IStatistic, int> entry in mapToAdd)
+                foreach (KeyValuePair<IStatistic, int> entry in mapToAdd)
                 {
                     _toAddPwu[entry.Key] = _toAddPwu.ContainsKey(entry.Key) ? _toAddPwu[entry.Key] + entry.Value : entry.Value;
                 }

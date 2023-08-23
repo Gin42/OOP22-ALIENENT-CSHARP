@@ -5,7 +5,7 @@ namespace AlienentShop.Impl
     public class ShopModelImpl : IShopModel
     {   
         private readonly FakeController _controller;
-        private List<IPowerUp> _powerUps = new();
+        private readonly List<IPowerUp> _powerUps = new();
 
         public ShopModelImpl(FakeController controller)
         {
@@ -14,18 +14,15 @@ namespace AlienentShop.Impl
 
         public void LoadPwu(List<IPowerUp> pwu)
         {
-            foreach (var p in pwu)
-            {
-                _powerUps.Add(p);
-            }
+            _powerUps.AddRange(pwu);
         }
+
         public int? Check(string id)
         {
             IUserAccount? user = _controller.Account;
-            return _powerUps.AsEnumerable().Where(p => p.Id.Equals(id))
-                    .Where(p => (user?.Money
-                            - p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
-                    .Select(p => -p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)).FirstOrDefault();
+            return _powerUps.AsEnumerable().FirstOrDefault(p => p.Id.Equals(id) &&
+                    (user?.Money - p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
+                    ?.Cost * (_controller.Account?.GetCurrLevel(id) + 1) ?? null;
         }
         public void UpdateShop(string id, int changeMoney)
         {
@@ -37,8 +34,8 @@ namespace AlienentShop.Impl
 
         private IUserAccount UpdateToAddPwu(string id, IUserAccount account) {
             
-            var mapToAdd = _powerUps.AsEnumerable().Where(p => p.Id.Equals(id, StringComparison.Ordinal)).Select(p => p.StatModifiers).FirstOrDefault();
-            if ( mapToAdd != null )
+            var mapToAdd = _powerUps.AsEnumerable().FirstOrDefault(p => p.Id.Equals(id))?.StatModifiers;
+            if (mapToAdd != null)
             {   
                 account.UpdateToAddPwu(mapToAdd);
             }
