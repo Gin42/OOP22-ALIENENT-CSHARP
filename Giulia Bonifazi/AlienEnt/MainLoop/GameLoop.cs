@@ -1,4 +1,5 @@
 using AlienEnt.Commons;
+using AlienEnt.Commons.Queue;
 using AlienEnt.GameWorld;
 using AlienEnt.Props;
 
@@ -10,23 +11,27 @@ namespace AlienEnt.MainLoop
         private readonly IWorld _world;
         private readonly PropRendererManager _rendererManager;
         private readonly PropEnemySpawner _enemySpawner;
+        private readonly PropInputSupplier? _inputSupplier;
+        private readonly InputQueue _inputQueue;
         private bool _stopped;
         private bool _paused;
         
-        public GameLoop(PropRendererManager rendererManager, IWorld world, string playerId)
+        public GameLoop(InputQueue inputQueue, PropRendererManager rendererManager, IWorld world, string playerId)
             : base()
         {
             _world = world;
             _rendererManager = rendererManager;
+            _inputQueue = inputQueue;
+            _stopped = false;
+            _paused = false;
 
             // Player and spawner setup.
             var player = new PropPlayerSpawner(world).GetPlayer(playerId);
             _world.Player = player;
+            _inputSupplier = player.InputSupplier;
             Point2D topRight = new(_world.Dimensions.Width,0);
             Point2D bottomLeft = new(0, _world.Dimensions.Height);
             _enemySpawner = new PropEnemySpawner(topRight, bottomLeft, _world, player);
-            _stopped = false;
-            _paused = false;
         }
 
         public void PauseLoop()
@@ -99,7 +104,10 @@ namespace AlienEnt.MainLoop
 
         private void ProcessInput()
         {
-            
+            while (_inputQueue.Count > 0)
+            {
+                _inputSupplier?.AddInput(_inputQueue.TakeInput());
+            }
         }
     }
 }
