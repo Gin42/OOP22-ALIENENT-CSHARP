@@ -1,4 +1,3 @@
-using System.Drawing;
 using AlienEnt.Commons;
 
 namespace AlienEnt.Props {
@@ -19,7 +18,7 @@ namespace AlienEnt.Props {
             Point2D p1, Point2D p2) 
                 : base(obj, Point2D.Origin)
             {
-                
+                // Method stub.
             }
 
     }

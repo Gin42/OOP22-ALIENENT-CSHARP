@@ -3,7 +3,6 @@ using AlienEnt.CollisionHandler;
 using AlienEnt.Commons;
 using AlienEnt.Commons.Bounds;
 using AlienEnt.Commons.Buffer;
-using AlienEnt.GameWorld;
 using AlienEnt.Props;
 using AlienEnt.Walls;
 
@@ -16,6 +15,7 @@ namespace AlienEnt.GameWorld
         private readonly ICollisionHandler _collisionHandler;
         private readonly IDoubleBuffer<PropGameObject> _doubleBuffer;
         private readonly ISet<PropGameObject> _lastAdded;
+        private PropGameObject? _player;
 
         public World (IDimensions dimensions) {
             Dimensions = dimensions;
@@ -35,8 +35,25 @@ namespace AlienEnt.GameWorld
                 return ret;
             }
         }
-        public PropGameObject? Player { get; set; }
-        public bool IsOver { private set; get; }
+        public PropGameObject? Player 
+        { 
+            get => _player;
+            set
+            {
+                if (value != null)
+                {
+                    _player = value;
+                    AddGameObject(value);
+                }
+            }
+        }
+        public bool? IsOver 
+        { 
+            get
+            {
+                return !_player?.IsAlive;
+            } 
+        }
         [DefaultValue(0)]
         public int Score { private set; get; }
         [DefaultValue(0)]
@@ -116,6 +133,12 @@ namespace AlienEnt.GameWorld
             s_wallBuilder.SetLocation(PropBoundaryHitbox.Locations.LEFT);
             walls.Add(s_wallBuilder.GetWall());
             s_wallBuilder.Clear();
+
+
+            walls.ForEach(w => {
+                _doubleBuffer.Buffer.Add(w);
+                _collisionHandler.AddHitbox(w.Hitbox);
+            });
         }
     }
 }

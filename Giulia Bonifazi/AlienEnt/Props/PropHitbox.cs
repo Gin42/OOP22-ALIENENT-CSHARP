@@ -1,11 +1,10 @@
 using AlienEnt.Commons;
 
-namespace AlienEnt.Props {
-    public class PropHitbox {
+namespace AlienEnt.Props 
+{
+    public class PropHitbox 
+    {
         private readonly PropGameObject _gameObject;
-        public Point2D Mov {get; set;}
-
-        public bool HasCollided {get; private set;}
 
         public PropHitbox (PropGameObject obj, Point2D mov) 
         {
@@ -13,6 +12,10 @@ namespace AlienEnt.Props {
             Mov = mov;
             HasCollided = false;
         }
+        
+        public Point2D Mov {get; set;}
+
+        public bool HasCollided {get; private set;}
         
         public void Update() 
         {

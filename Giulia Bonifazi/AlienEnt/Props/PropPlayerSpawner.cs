@@ -7,6 +7,7 @@ namespace AlienEnt.Props
     {
         private readonly static Dictionary<PropStatistic, int> s_defaultStats = new() {{PropStatistic.HP, 50}};
         private readonly IWorld _world;
+
         public PropPlayerSpawner(IWorld world)
         {
             _world = world;
@@ -14,7 +15,11 @@ namespace AlienEnt.Props
 
         public PropGameObject GetPlayer(string Id)
         {
-            return new PropGameObject(Point2D.Origin, s_defaultStats, Id);
+            var player = new PropGameObject(Point2D.Origin, s_defaultStats, Id)
+            {
+                InputSupplier = new PropInputSupplier()
+            };
+            return player;
         }
     }
 }

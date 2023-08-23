@@ -10,5 +10,10 @@ namespace AlienEnt.Props
         public void AddRenderer(PropGameObject obj){
             RendererCount++;
         }
+
+        public void Render()
+        {
+            // Method stub.
+        }
     }
 }

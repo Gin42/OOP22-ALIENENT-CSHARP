@@ -6,7 +6,7 @@ namespace AlienEnt.GameWorld {
         IDimensions Dimensions { get; }
         ISet<PropGameObject> LastAdded { get; }
         PropGameObject? Player { get; set; }
-        bool IsOver { get; }
+        bool? IsOver { get; }
         int Score { get; }
         int EnemyCount { get; }
 

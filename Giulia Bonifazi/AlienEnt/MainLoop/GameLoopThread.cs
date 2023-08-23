@@ -14,7 +14,5 @@ namespace AlienEnt.MainLoop
         public void Stop() => _thread.Join();
 
         public abstract void RunThread();
-
-        public abstract void PauseThread();
     }
 }
