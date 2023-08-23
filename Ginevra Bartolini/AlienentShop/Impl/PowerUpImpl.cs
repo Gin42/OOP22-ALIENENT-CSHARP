@@ -35,7 +35,7 @@ namespace AlienentShop.Impl
         public Dictionary<IStatistic, int> StatModifiers
         {
             get => _statModifiers;
-            set => _statModifiers = value;
+            set => _statModifiers = new Dictionary<IStatistic, int>(value);
         }
 
     }

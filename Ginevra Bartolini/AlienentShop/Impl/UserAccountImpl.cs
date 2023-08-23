@@ -2,12 +2,25 @@ using AlienentShop.Api;
 
 namespace AlienentShop.Impl
 {
+    /*  The class doesn't present an empty constructor, like its 
+        java counterpart, since it was only used from the yaml 
+        configuration file. Since that feature is not the focus of my
+        test it was omitted. 
+    */
     public class UserAccountImpl : IUserAccount
     {   
+        private static readonly int LIMIT = 1000;
+
+        private static readonly int MAX_MONEY = int.MaxValue - LIMIT;
+
         private string _nickname = "";
+
         private int _money = 0;
+
         private int _highscore = 0;
+
         private Dictionary<string,int> _inventory =  new();
+
         private Dictionary<IStatistic,int> _toAddPwu = new();
 
         public UserAccountImpl(string nickname) {
@@ -19,7 +32,13 @@ namespace AlienentShop.Impl
         public int Money
         {
             get => _money;
-            set => _money += value;
+            set
+            {
+                if ((double) _money + value < MAX_MONEY)
+                {
+                    _money += value;
+                }
+            } 
         }
 
         public string Nickname
@@ -37,27 +56,13 @@ namespace AlienentShop.Impl
         public Dictionary<string, int> Inventory
         { 
             get => _inventory; 
-            set
-            {
-                _inventory.Clear();
-                foreach (var s in value)
-                {
-                    _inventory.Add(s.Key, s.Value);
-                }
-            }
+            set => _inventory = new Dictionary<string, int>(value);
         }
 
         public Dictionary<IStatistic, int> ToAddPwu
         { 
             get => _toAddPwu;
-            set
-            {
-                _toAddPwu.Clear();
-                foreach (var s in value)
-                {
-                    _toAddPwu.Add(s.Key, s.Value);
-                }
-            } 
+            set => _toAddPwu =  new Dictionary<IStatistic, int>(value);
         }
 
         public int GetCurrLevel(string id)

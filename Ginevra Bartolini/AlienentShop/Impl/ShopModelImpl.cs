@@ -19,10 +19,10 @@ namespace AlienentShop.Impl
 
         public int? Check(string id)
         {
-            IUserAccount? user = _controller.Account;
+            IUserAccount user = _controller.Account;
             return _powerUps.AsEnumerable().FirstOrDefault(p => p.Id.Equals(id) &&
-                    (user?.Money - p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
-                    ?.Cost * (_controller.Account?.GetCurrLevel(id) + 1) ?? null;
+                    (user.Money - p.Cost * (_controller.Account?.GetCurrLevel(id) + 1)) >= 0)
+                    ?.Cost * -(_controller.Account?.GetCurrLevel(id) + 1) ?? null;
         }
         public void UpdateShop(string id, int changeMoney)
         {
@@ -34,7 +34,7 @@ namespace AlienentShop.Impl
 
         private IUserAccount UpdateToAddPwu(string id, IUserAccount account) {
             
-            var mapToAdd = _powerUps.AsEnumerable().FirstOrDefault(p => p.Id.Equals(id))?.StatModifiers;
+            Dictionary<IStatistic, int>? mapToAdd = _powerUps.AsEnumerable().FirstOrDefault(p => p.Id.Equals(id))?.StatModifiers;
             if (mapToAdd != null)
             {   
                 account.UpdateToAddPwu(mapToAdd);

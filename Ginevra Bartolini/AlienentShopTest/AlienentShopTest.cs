@@ -4,7 +4,10 @@ using YamlDotNet.RepresentationModel;
 
 namespace AlienentShopTest
 {
-
+    /*  The omitted methods and fields where not usefull 
+        for the focus of the test, which is the shop buying 
+        system.
+    */
     [TestClass]
     public class AlienentShopTest
     {
@@ -51,11 +54,11 @@ namespace AlienentShopTest
             _shopController.LoadPwuYaml();
             BuildPwuList();
 
-            var list = _shopController.Pwu.AsEnumerable()
+            List<IPowerUp> list = _shopController.Pwu.AsEnumerable()
                         .Where(sp => _pwu.AsEnumerable().Any(lp => lp.Id == sp.Id)).ToList();
             foreach (var sp in list)
             {   
-                var currPwu = _pwu.AsEnumerable().FirstOrDefault(lp => lp.Id == sp.Id) ?? null;
+                IPowerUp? currPwu = _pwu.AsEnumerable().FirstOrDefault(lp => lp.Id == sp.Id) ?? null;
                 Assert.IsNotNull(currPwu);
                 Assert.AreEqual(currPwu.Cost, sp.Cost);
                 Assert.AreEqual(currPwu.MaxLevel, sp.MaxLevel);

@@ -5,6 +5,9 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace AlienentShop.Impl
 {
+    /*  To understand the reason behind omitted methods and fields,
+        see AlienentShop.Api IShopController.
+    */
     public class ShopControllerImpl : IShopController, IInitController
     {
         private static readonly string YML = ".yml";
@@ -32,7 +35,6 @@ namespace AlienentShop.Impl
             string filename = PWU + YML;
             if (File.Exists(filename)) 
             {
-
                 string content =  File.ReadAllText(filename);
                 string[] documents = content.Split(new[] {"---"}, 
                         StringSplitOptions.RemoveEmptyEntries);
@@ -45,7 +47,7 @@ namespace AlienentShop.Impl
                 {
                     try
                     {
-                        var custom = deserializer.Deserialize<PowerUpImpl>(doc);
+                        PowerUpImpl custom = deserializer.Deserialize<PowerUpImpl>(doc);
                         _powerUps.Add(custom);
                     } catch (YamlException)
                     {

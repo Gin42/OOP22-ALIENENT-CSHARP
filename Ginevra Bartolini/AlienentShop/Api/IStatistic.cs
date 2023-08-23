@@ -1,6 +1,6 @@
 namespace  AlienentShop.Api
 {
-    public enum IStatistic 
+    public enum IStatistic
     {
         HP,
 
