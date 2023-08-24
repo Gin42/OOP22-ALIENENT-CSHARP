@@ -1,6 +1,5 @@
 using AlienentShop.Api;
 using AlienentShop.Impl;
-using YamlDotNet.RepresentationModel;
 
 namespace AlienentShopTest
 {

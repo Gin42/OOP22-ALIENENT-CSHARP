@@ -12,6 +12,7 @@ namespace AlienentShop.Impl
     {
         private static readonly string YML = ".yml";
         private static readonly string PWU = "PowerUps";
+        private static readonly string DIR = "Config\\";
 
         private FakeController _controller = new();
         private IUserAccount _account = new UserAccountImpl("");
@@ -31,8 +32,8 @@ namespace AlienentShop.Impl
         public List<IPowerUp> Pwu  => _powerUps;
 
         public void LoadPwuYaml()
-        {              
-            string filename = PWU + YML;
+        {   
+            string filename = ProjectSourcePath.Value + DIR + PWU +YML;
             if (File.Exists(filename)) 
             {
                 string content =  File.ReadAllText(filename);

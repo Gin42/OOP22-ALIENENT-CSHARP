@@ -1,0 +1,84 @@
+---
+id: "Health"
+cost: 30000
+maxLevel: 5
+statModifiers:
+  HP: 5
+  SPEED: 0
+  DAMAGE: 0
+  DEFENCE: 0
+  PROJECTILESPEED: 0
+  COOLDOWN: 0
+  RECOVERY: 0
+---
+id: "Speed"
+cost: 20000
+maxLevel: 3
+statModifiers:
+  HP: 0
+  SPEED: 5
+  DAMAGE: 0
+  DEFENCE: 0
+  PROJECTILESPEED: 0
+  COOLDOWN: 0
+  RECOVERY: 0
+---
+id: "Damage"
+cost: 50000
+maxLevel: 2
+statModifiers:
+  HP: 0
+  SPEED: 0
+  DAMAGE: 5
+  DEFENCE: 0
+  PROJECTILESPEED: 0
+  COOLDOWN: 0
+  RECOVERY: 0
+---
+id: "Defence"
+cost: 40000
+maxLevel: 4
+statModifiers:
+  HP: 0
+  SPEED: 0
+  DAMAGE: 0
+  DEFENCE: 5
+  PROJECTILESPEED: 0
+  COOLDOWN: 0
+  RECOVERY: 0
+---
+id: "ProjectileSpeed"
+cost: 70000
+maxLevel: 5
+statModifiers:
+  HP: 0
+  SPEED: 0
+  DAMAGE: 0
+  DEFENCE: 0
+  PROJECTILESPEED: 5
+  COOLDOWN: 0
+  RECOVERY: 0
+---
+id: "Cooldown"
+cost: 10000
+maxLevel: 2
+statModifiers:
+  HP: 0
+  SPEED: 0
+  DAMAGE: 0
+  DEFENCE: 0
+  PROJECTILESPEED: 0
+  COOLDOWN: 5
+  RECOVERY: 0
+---
+id: "Recovery"
+cost: 800000
+maxLevel: 5
+statModifiers:
+  HP: 0
+  SPEED: 0
+  DAMAGE: 0
+  DEFENCE: 0
+  PROJECTILESPEED: 0
+  COOLDOWN: 0
+  RECOVERY: 5
