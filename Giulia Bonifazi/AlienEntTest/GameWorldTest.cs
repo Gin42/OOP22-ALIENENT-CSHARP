@@ -64,5 +64,19 @@ namespace AlienEntTest
             _world.Update(0.0);
             Assert.IsTrue(_world.IsOver);
         }
+
+        [TestMethod]
+        public void TestLastAdded()
+        {
+            Assert.AreEqual(_world.LastAdded.Count, 0);
+
+            PropGameObject obj1 = new(Point2D.Origin, s_stats, "enemy");
+            PropGameObject obj2 = new(new(20, 20), s_stats, "player");
+            PropGameObject obj3 = new(new(20, 30), s_stats, "enemy");
+            var list = new List<PropGameObject>(){ obj1, obj2, obj3 };
+            _world.AddAllGameObjects(obj1, obj2, obj3);
+            Assert.IsTrue(list.SequenceEqual(_world.LastAdded));
+            Assert.AreEqual(_world.LastAdded.Count, 0);
+        }
     }
 }

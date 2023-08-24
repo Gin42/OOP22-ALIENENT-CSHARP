@@ -74,7 +74,7 @@ namespace AlienEnt.GameWorld
             }
             _doubleBuffer.Buffer.Add(obj);
             _collisionHandler.AddHitbox(obj.Hitbox);
-            LastAdded.Add(obj);
+            _lastAdded.Add(obj);
         }
 
         public void Update(double deltaTime)
