@@ -5,6 +5,9 @@ using AlienEnt.Props;
 
 namespace AlienEnt.MainLoop
 {
+    /// <summary>
+    /// GameLoop contains the GameLoopThread and implements the interface IGameLoop.
+    /// </summary>
     public sealed class GameLoop : GameLoopThread, IGameLoop
     {
         private static readonly double s_msPerFrame = 20;
@@ -16,6 +19,7 @@ namespace AlienEnt.MainLoop
         private readonly InputQueue _inputQueue;
         private bool _stopped;
         private bool _paused;
+        private bool _started;
         
         public GameLoop(InputQueue inputQueue, PropRendererManager rendererManager, IWorld world, string playerId,
             CancellationToken token) : base()
@@ -25,6 +29,7 @@ namespace AlienEnt.MainLoop
             _inputQueue = inputQueue;
             _stopped = false;
             _paused = false;
+            _started = false;
             _token = token;
 
             // Player and spawner setup.
@@ -49,7 +54,11 @@ namespace AlienEnt.MainLoop
 
         public void StartLoop()
         {
-            Start();
+            if (!_started)
+            {
+                _started = true;
+                Start();
+            }
         }
 
         public override void RunThread()
@@ -78,7 +87,6 @@ namespace AlienEnt.MainLoop
         public void StopLoop()
         {
             ResumeLoop();
-            Stop();
         }
 
         private void Render()

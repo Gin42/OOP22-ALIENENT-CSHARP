@@ -1,9 +1,12 @@
 namespace AlienEnt.MainLoop
 {
+    /// <summary>
+    /// This class is needed to incapsulate a Thread instance,
+    /// as Thread itself is a sealed class, and thus cannot be extended.
+    /// </summary>
     public abstract class GameLoopThread
     {
         private readonly Thread _thread;
-        private readonly CancellationTokenSource _cts = new();
 
         public GameLoopThread()
         {
@@ -11,11 +14,8 @@ namespace AlienEnt.MainLoop
         }
 
         public void Start() => _thread.Start();
-        
-        public void Stop()
-        {
-            _cts.Cancel();
-        }
+
+        public bool IsAlive() => _thread.IsAlive;
 
         public abstract void RunThread();
     }
