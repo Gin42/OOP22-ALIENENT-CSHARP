@@ -26,14 +26,18 @@ namespace AlienEntTest
         [TestMethod]
         public void PauseTest()
         {
+            int enemySpawnTimeMillis = (int) PropEnemySpawner.s_enemySpawnTime * 1000;
+
             // Start the loop and let it work for a bit
             _gameLoop.StartLoop();
-            Thread.Sleep(1000);
+            // This expression makes sure the GameLoop always spawns one enemy
+            // and that no enemy is spawned before the pause.
+            Thread.Sleep(enemySpawnTimeMillis * 2 - enemySpawnTimeMillis / 3);
             
             // Remember how many enemies had spawned before the pause.
-            int exp = _rendererManager.RendererCount;
             _gameLoop.PauseLoop();
-            Thread.Sleep(2000);
+            int exp = _rendererManager.RendererCount;
+            Thread.Sleep(enemySpawnTimeMillis * 5);
 
             // Check that the number of enemies stayed the same through the pause.
             Assert.AreEqual(exp, _rendererManager.RendererCount);
@@ -47,8 +51,12 @@ namespace AlienEntTest
         [TestMethod]
         public void StopTest()
         {
+            int waitForThreadDeath = 500;
+
             _gameLoop.StartLoop();
             _cts.Cancel();
+            // It might take a while for the thread to die.
+            Thread.Sleep(waitForThreadDeath);
             Assert.IsFalse(_gameLoop.IsAlive());
         }
     }

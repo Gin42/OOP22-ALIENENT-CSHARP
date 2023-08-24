@@ -84,11 +84,6 @@ namespace AlienEnt.MainLoop
             }
         }
 
-        public void StopLoop()
-        {
-            ResumeLoop();
-        }
-
         private void Render()
         {
             _rendererManager.Render();

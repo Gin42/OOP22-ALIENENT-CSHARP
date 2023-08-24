@@ -13,6 +13,8 @@ namespace AlienEnt.MainLoop
             _thread = new Thread(new ThreadStart(RunThread));
         }
 
+        public void Stop() => _thread.Join();
+
         public void Start() => _thread.Start();
 
         public bool IsAlive() => _thread.IsAlive;
