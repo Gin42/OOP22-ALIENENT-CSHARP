@@ -3,6 +3,7 @@ namespace AlienEnt.MainLoop
     public abstract class GameLoopThread
     {
         private readonly Thread _thread;
+        private readonly CancellationTokenSource _cts = new();
 
         public GameLoopThread()
         {
@@ -11,7 +12,10 @@ namespace AlienEnt.MainLoop
 
         public void Start() => _thread.Start();
         
-        public void Stop() => _thread.Join();
+        public void Stop()
+        {
+            _cts.Cancel();
+        }
 
         public abstract void RunThread();
     }

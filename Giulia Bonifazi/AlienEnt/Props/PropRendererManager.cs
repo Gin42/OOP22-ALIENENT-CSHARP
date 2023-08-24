@@ -8,7 +8,7 @@ namespace AlienEnt.Props
         public int RendererCount { get; private set; }
 
         public void AddRenderer(PropGameObject obj){
-            RendererCount++;
+            RendererCount += 1;
         }
 
         public void Render()

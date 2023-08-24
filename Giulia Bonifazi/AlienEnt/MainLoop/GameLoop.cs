@@ -8,6 +8,7 @@ namespace AlienEnt.MainLoop
     public sealed class GameLoop : GameLoopThread, IGameLoop
     {
         private static readonly double s_msPerFrame = 20;
+        private readonly CancellationToken _token;
         private readonly IWorld _world;
         private readonly PropRendererManager _rendererManager;
         private readonly PropEnemySpawner _enemySpawner;
@@ -16,14 +17,15 @@ namespace AlienEnt.MainLoop
         private bool _stopped;
         private bool _paused;
         
-        public GameLoop(InputQueue inputQueue, PropRendererManager rendererManager, IWorld world, string playerId)
-            : base()
+        public GameLoop(InputQueue inputQueue, PropRendererManager rendererManager, IWorld world, string playerId,
+            CancellationToken token) : base()
         {
             _world = world;
             _rendererManager = rendererManager;
             _inputQueue = inputQueue;
             _stopped = false;
             _paused = false;
+            _token = token;
 
             // Player and spawner setup.
             var player = new PropPlayerSpawner(world).GetPlayer(playerId);
@@ -43,7 +45,11 @@ namespace AlienEnt.MainLoop
         public void ResumeLoop()
         {
             _paused = false;
-            Monitor.PulseAll(this);
+        }
+
+        public void StartLoop()
+        {
+            Start();
         }
 
         public override void RunThread()
@@ -51,31 +57,27 @@ namespace AlienEnt.MainLoop
             long previousStart = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             while (!_stopped)
             {
-                if (_paused)
+                if (_token.IsCancellationRequested)
                 {
-                    lock (this)
-                    {
-                        while (_paused)
-                        {
-                            Monitor.Wait(this);
-                        }
-                    }
-                    previousStart = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    return;
                 }
                 long currentStart = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                long elapsed = currentStart - previousStart;
-                ProcessInput();
-                UpdateGame(elapsed / 1000);
-                Render();
+                if (!_paused)
+                {
+                    long elapsed = currentStart - previousStart;
+                    ProcessInput();
+                    UpdateGame(elapsed / 1000.0);
+                    Render();
+                }
                 WaitForNextFrame(DateTimeOffset.Now.ToUnixTimeMilliseconds() - currentStart);
                 previousStart = currentStart;
+
             }
         }
 
         public void StopLoop()
         {
             ResumeLoop();
-            _stopped = true;
             Stop();
         }
 
