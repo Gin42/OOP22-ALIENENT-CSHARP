@@ -13,21 +13,16 @@ namespace AlienEnt.Commons.Queue
         public PropInput TakeInput()
         {
             var str = Take();
-            switch (str)
+            var ret = str switch
             {
-                case "w":
-                    return PropInput.ACCELERATE;
-                case "s":
-                    return PropInput.STOP_ACCELERATE;
-                case "a":
-                    return PropInput.TURN_LEFT;
-                case "d":
-                    return PropInput.TURN_RIGHT;
-                case " ":
-                    return PropInput.SHOOT;
-                default:
-                    return PropInput.NOTHING;
-            }
+                "w" => PropInput.ACCELERATE,
+                "s" => PropInput.STOP_ACCELERATE,
+                "a" => PropInput.TURN_LEFT,
+                "d" => PropInput.TURN_RIGHT,
+                " " => PropInput.SHOOT,
+                _ => PropInput.NOTHING,
+            };
+            return ret;
         }
     }
 }
