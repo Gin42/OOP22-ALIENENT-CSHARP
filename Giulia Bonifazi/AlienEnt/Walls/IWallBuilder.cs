@@ -3,10 +3,11 @@ using AlienEnt.Props;
 
 namespace AlienEnt.Walls 
 {
+    /// <summary>
+    /// WallBuilder interface.
+    /// </summary>
     public interface IWallBuilder 
     {
-        PropGameObject GameObject { get; }
-
         void AddPresetGameObject();
 
         void AddGameObject(Point2D? pos, Dictionary<PropStatistic, int>? stats, string? id);

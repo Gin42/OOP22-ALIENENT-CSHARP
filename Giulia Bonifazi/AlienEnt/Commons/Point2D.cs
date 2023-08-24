@@ -1,5 +1,8 @@
 namespace AlienEnt.Commons {
 
+    /// <summary>
+    /// Utility class that represents a two dimensional point.
+    /// </summary>
     public class Point2D
     {
 
@@ -15,6 +18,15 @@ namespace AlienEnt.Commons {
             get => new(0.0, 0.0);
         }
 
+        /// <summary>
+        /// This method checks if the two objects are equal in value.
+        /// </summary>
+        /// <param name="otherItem">
+        /// The second object.
+        /// </param>
+        /// <returns>
+        /// Whether the two objects are the same.
+        /// </returns>
         public bool IsSame(object? otherItem)
         {
             if (otherItem is Point2D)

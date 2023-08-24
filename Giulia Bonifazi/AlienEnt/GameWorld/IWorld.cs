@@ -2,7 +2,12 @@ using AlienEnt.Commons.Bounds;
 using AlienEnt.Props;
 
 namespace AlienEnt.GameWorld {
+    /// <summary>
+    /// World interface.
+    /// </summary>
+
     public interface IWorld {
+        
         IDimensions Dimensions { get; }
         ISet<PropGameObject> LastAdded { get; }
         PropGameObject? Player { get; set; }

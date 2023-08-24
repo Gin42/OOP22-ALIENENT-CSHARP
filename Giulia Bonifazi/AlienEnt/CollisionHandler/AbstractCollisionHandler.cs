@@ -1,6 +1,10 @@
 using AlienEnt.Props;
 
 namespace AlienEnt.CollisionHandler {
+    /// <summary>
+    /// This abstract class allows us to carry over the recursive check method to other
+    /// implementations.
+    /// </summary>
     public abstract class AbstractCollisionHandler : ICollisionHandler 
     {
         private readonly IList<PropHitbox> _collidables;

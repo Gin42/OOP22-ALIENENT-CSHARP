@@ -9,6 +9,7 @@ namespace AlienEnt.Commons.Buffer {
             Current = new HashSet<T>();
             Buffer = new HashSet<T>();
         }
+        
         public ISet<T> Buffer {private set; get;}
         public ISet<T> Current {private set; get;}
 

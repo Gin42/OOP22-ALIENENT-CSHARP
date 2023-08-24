@@ -8,6 +8,12 @@ using AlienEnt.Walls;
 
 namespace AlienEnt.GameWorld 
 {
+    /// <summary>
+    /// Implementation of the IWorld interface. 
+    /// We determined that a Prop implementation of the ShipLoader would be unnecessary for
+    /// this part of the project.
+    /// </summary>
+
     public sealed class World : IWorld
     {
         private readonly static IWallBuilder s_wallBuilder = new WallBuilder();

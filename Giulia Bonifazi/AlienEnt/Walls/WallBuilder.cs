@@ -3,6 +3,9 @@ using AlienEnt.Props;
 
 namespace AlienEnt.Walls
 {
+    /// <summary>
+    /// WallBuilder implementation. 
+    /// </summary>
     public class WallBuilder : IWallBuilder
     {
         private static readonly string s_defaultId = "Mexico_border";
@@ -13,10 +16,6 @@ namespace AlienEnt.Walls
         };
         private PropBoundaryHitbox? _hitbox;
         private PropGameObject _gameObject;
-        public PropGameObject GameObject 
-        {
-            get => _gameObject;
-        }
 
         public WallBuilder() {
             _gameObject = new PropGameObject(Point2D.Origin, s_defaultStatistics, s_defaultId);

@@ -3,11 +3,16 @@ using AlienEnt.Props;
 
 namespace AlienEnt.Commons.Queue 
 {
+    /// <summary>
+    /// This class is a bridge that allows the inputs captured by the view to
+    /// reach the model and move the player character. 
+    /// </summary>
+
     public class InputQueue : BlockingCollection<string>
     {
 
         public InputQueue(int maxSize) : base(maxSize){
-            
+            // Empty constructor
         }
 
         public PropInput TakeInput()

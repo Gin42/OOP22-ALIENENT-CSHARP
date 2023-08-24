@@ -2,6 +2,10 @@ using System.ComponentModel;
 
 namespace AlienEnt.Commons.Bounds
 {
+    /// <summary>
+    /// This is a more basic implementation of Dimensions than its java counterpart, as 
+    /// it was not relevant to the tests and it was only needed for other class implementations.
+    /// </summary>
     public class Dimensions : IDimensions
     {
         private static readonly double s_screenWidthPercent = 1.0;
