@@ -101,7 +101,7 @@ namespace AlienEnt.GameObject
         public void Recovery(double deltatime)
         {
             _recoveryCooldown += deltatime;
-            if (_recoveryCooldown > 1)
+            if (_recoveryCooldown >= 1)
             {
                 Heal(GetStatValue(Statistic.RECOVERY) ?? 0);
                 _recoveryCooldown = 0;
