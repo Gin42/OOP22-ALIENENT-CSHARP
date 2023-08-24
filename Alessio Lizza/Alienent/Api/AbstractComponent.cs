@@ -1,4 +1,5 @@
-namespace Alienent {
+namespace Alienent.Api
+{
     public abstract class AbstractComponent : IComponent
     {
         private readonly IGameObject _gameObject;

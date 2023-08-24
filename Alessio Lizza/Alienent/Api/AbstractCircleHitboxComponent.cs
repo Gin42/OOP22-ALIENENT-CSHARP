@@ -1,6 +1,8 @@
-using static Alienent.IHitboxComponent;
+using Alienent.geometry;
+using static Alienent.Api.IHitboxComponent;
 
-namespace Alienent {
+namespace Alienent.Api
+{
 
     public abstract class AbstractCircleHitboxComponent : AbstractComponent, IHitboxComponent
     {
@@ -33,6 +35,10 @@ namespace Alienent {
                 if (hitbox is AbstractCircleHitboxComponent circleHitbox && _hitbox.IntersectWith(circleHitbox.GetHitbox()))
                 {
                     IsColliding(hitbox);
+                    hitbox.IsColliding(this);
+                }
+                else if (hitbox is BoundaryHitboxComponent component && _hitbox.IntersectWith(component.GetLine()))
+                {
                     hitbox.IsColliding(this);
                 }
             }

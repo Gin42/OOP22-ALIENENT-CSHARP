@@ -1,7 +1,11 @@
 using Alienent;
-using static Alienent.IHitboxComponent;
+using Alienent.Api;
+using Alienent.geometry;
+using static Alienent.IBoundaryHitboxComponent;
+using static Alienent.Api.IHitboxComponent;
 
-namespace HitboxTest{
+namespace HitboxTest
+{
     [TestClass]
     public class UnitTest1
     {
@@ -13,9 +17,9 @@ namespace HitboxTest{
         private const int LIFE15 = 15;
         private const int LIFE50 = 50;
         private const int LIFE99 = 99;
-        private static readonly Dictionary<Statistic, int> STATMAP1 = new Dictionary<Statistic, int> { { Statistic.HP, 100 }, { Statistic.DAMAGE, 50 } };
-        private static readonly Dictionary<Statistic, int> STATMAP2 = new Dictionary<Statistic, int> { { Statistic.HP, 1 }, { Statistic.DAMAGE, 15 } };
-        private static readonly Dictionary<Statistic, int> STATMAP3 = new Dictionary<Statistic, int> { { Statistic.HP, 100 }, { Statistic.DAMAGE, 1 } };
+        private static readonly Dictionary<Statistic, int> STATMAP1 = new() { { Statistic.HP, 100 }, { Statistic.DAMAGE, 50 } };
+        private static readonly Dictionary<Statistic, int> STATMAP2 = new() { { Statistic.HP, 1 }, { Statistic.DAMAGE, 15 } };
+        private static readonly Dictionary<Statistic, int> STATMAP3 = new() { { Statistic.HP, 100 }, { Statistic.DAMAGE, 1 } };
         private static readonly IGameObject OBJ1 = new GameObjectAbs(new Point2D(2, 0), Vector2D.NULL_VECTOR, STATMAP1, "null");
         private static readonly IGameObject OBJ2 = new GameObjectAbs(new Point2D(2, 0), Vector2D.NULL_VECTOR, STATMAP2, "null");
         private static readonly IGameObject OBJ3 = new GameObjectAbs(new Point2D(10, 0), Vector2D.NULL_VECTOR, STATMAP3, "null");
@@ -27,24 +31,24 @@ namespace HitboxTest{
             var hitbox1 = new BomberHitboxComponentImpl(OBJ1, true, TypeObject.ENEMY, 2);
             var hitbox2 = new SimpleProjectileHitboxComponent(OBJ2, true, TypeObject.PROJECTILE, 2);
             hitbox2.SetShooter(TypeObject.PLAYER);
-            //var hitbox3 = new BoundaryHitboxComponentImpl(OBJ3, true, TypeObject.BOUNDARY, new Point2D(0, 1), new Point2D(1, 1));
-            //hitbox3.SetLocations(Locations.DOWN);
+            var hitbox3 = new BoundaryHitboxComponent(OBJ3, true, TypeObject.BOUNDARY, new Point2D(0, 1), new Point2D(1, 1));
+            hitbox3.SetLocations(Locations.DOWN);
             var hitbox4 = new SimpleProjectileHitboxComponent(OBJ4, true, TypeObject.PROJECTILE, 2);
             hitbox4.SetShooter(TypeObject.ENEMY);
             OBJ1.AddComponent(hitbox1);
             OBJ2.AddComponent(hitbox2);
-            //OBJ3.AddComponent(hitbox3);
+            OBJ3.AddComponent(hitbox3);
             OBJ4.AddComponent(hitbox4);
 
             hitbox1.CanCollide(hitbox2);
             Assert.AreEqual(0, hitbox2.GetGameObject().GetHealth());
             Assert.AreEqual(LIFE85, hitbox1.GetGameObject().GetHealth());
 
-            //hitbox4.CanCollide(hitbox3);
-            //Assert.AreEqual(100, hitbox3.GetGameObject().GetHealth());
+            hitbox4.CanCollide(hitbox3);
+            Assert.AreEqual(100, hitbox3.GetGameObject().GetHealth());
 
-            //hitbox2.CanCollide(hitbox3);
-            Assert.AreEqual(0, hitbox2.GetGameObject().GetHealth());
+            hitbox2.CanCollide(hitbox3);
+            Assert.AreEqual(LIFE999N, hitbox2.GetGameObject().GetHealth());
 
             hitbox1.CanCollide(hitbox4);
             Assert.AreEqual(LIFE85, hitbox1.GetGameObject().GetHealth());
@@ -128,6 +132,52 @@ namespace HitboxTest{
             Assert.AreEqual(1, OBJ2.GetHealth());
             hitbox4.IsColliding(hitbox3);
             Assert.AreEqual(LIFE85, OBJ3.GetHealth());
+        }
+
+        [TestMethod]
+        public void CollideBoundary()
+        {
+            Dictionary<Statistic, int> statMap1 = new()
+            {
+                { Statistic.HP, 100 },
+                { Statistic.DAMAGE, 1 }
+            };
+            var obj1 = new GameObjectAbs(new Point2D(2, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var obj2 = new GameObjectAbs(new Point2D(NUM5, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var obj3 = new GameObjectAbs(new Point2D(10, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var wallUp = new GameObjectAbs(new Point2D(0, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var wallRight = new GameObjectAbs(new Point2D(0, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var wallDown = new GameObjectAbs(new Point2D(0, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var wallLeft = new GameObjectAbs(new Point2D(0, 0), Vector2D.NULL_VECTOR, statMap1, "null");
+            var hitbox1 = new BomberHitboxComponentImpl(obj1, true, TypeObject.ENEMY, 2);
+            var hitbox2 = new SimpleProjectileHitboxComponent(obj2, true, TypeObject.PROJECTILE, 2);
+            var hitbox3 = new SimpleShipHitboxComponent(obj3, true, TypeObject.PLAYER, 2);
+            var hitboxUp = new BoundaryHitboxComponent(wallUp, true, TypeObject.BOUNDARY, new Point2D(0, 0), new Point2D(1, 1));
+            hitboxUp.SetLocations(Locations.UP);
+            var hitboxRight = new BoundaryHitboxComponent(wallRight, true, TypeObject.BOUNDARY, new Point2D(0, 0), new Point2D(1, 1));
+            hitboxRight.SetLocations(Locations.RIGHT);
+            var hitboxDown = new BoundaryHitboxComponent(wallDown, true, TypeObject.BOUNDARY, new Point2D(0, 0), new Point2D(1, 1));
+            hitboxDown.SetLocations(Locations.DOWN);
+            var hitboxLeft = new BoundaryHitboxComponent(wallLeft, true, TypeObject.BOUNDARY, new Point2D(0, 0), new Point2D(1, 1));
+            hitboxLeft.SetLocations(Locations.LEFT);
+            obj1.AddComponent(hitbox1);
+            obj2.AddComponent(hitbox2);
+            obj3.AddComponent(hitbox3);
+            wallUp.AddComponent(hitboxUp);
+            wallRight.AddComponent(hitboxRight);
+            wallDown.AddComponent(hitboxDown);
+            wallLeft.AddComponent(hitboxLeft);
+            hitboxUp.IsColliding(hitbox2);
+            Assert.AreEqual(LIFE899N, obj2.GetHealth());
+            obj2.Heal(LIFE999);
+            hitboxRight.IsColliding(hitbox2);
+            Assert.AreEqual(LIFE899N, obj2.GetHealth());
+            obj2.Heal(LIFE999);
+            hitboxDown.IsColliding(hitbox2);
+            Assert.AreEqual(LIFE899N, obj2.GetHealth());
+            obj2.Heal(LIFE999);
+            hitboxLeft.IsColliding(hitbox2);
+            Assert.AreEqual(LIFE899N, obj2.GetHealth());
         }
 
     }

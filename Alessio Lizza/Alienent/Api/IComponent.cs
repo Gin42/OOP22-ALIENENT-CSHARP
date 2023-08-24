@@ -1,4 +1,5 @@
-namespace Alienent{
+namespace Alienent.Api
+{
     public interface IComponent
     {
         void Update(double deltaTime);

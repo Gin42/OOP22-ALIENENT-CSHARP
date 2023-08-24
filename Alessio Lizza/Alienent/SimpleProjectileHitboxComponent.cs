@@ -1,6 +1,8 @@
-using static Alienent.IHitboxComponent;
+using Alienent.Api;
+using static Alienent.Api.IHitboxComponent;
 
-namespace Alienent {
+namespace Alienent
+{
     public class SimpleProjectileHitboxComponent : AbstractCircleHitboxComponent, IProjectileHitboxComponent
     {
         private TypeObject shooter;
@@ -14,7 +16,7 @@ namespace Alienent {
         {
             if (hitbox.GetTypeObject() != TypeObject.PROJECTILE && hitbox.GetTypeObject() != shooter)
             {
-                hitbox.GetGameObject().Hit(base.GetGameObject().GetStatValue(Statistic.DAMAGE));
+                hitbox.GetGameObject().Hit(GetGameObject().GetStatValue(Statistic.DAMAGE));
             }
         }
 

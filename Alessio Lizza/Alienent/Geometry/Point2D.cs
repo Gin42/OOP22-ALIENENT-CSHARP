@@ -1,4 +1,5 @@
-namespace Alienent{
+namespace Alienent.geometry
+{
 
     public class Point2D
     {
@@ -17,7 +18,7 @@ namespace Alienent{
 
         public double GetY() => y;
 
-        public double DistanceFrom(Point2D p) => Math.Sqrt(Math.Pow(this.GetX() - p.GetX(), 2) + Math.Pow(this.GetY() - p.GetY(), 2));
+        public double DistanceFrom(Point2D p) => Math.Sqrt(Math.Pow(GetX() - p.GetX(), 2) + Math.Pow(GetY() - p.GetY(), 2));
 
         public override string ToString() => $"Point2D [x={GetX()}, y={GetY()}]";
 
@@ -27,9 +28,9 @@ namespace Alienent{
             int result = 1;
             long temp;
             temp = BitConverter.DoubleToInt64Bits(x);
-            result = prime * result + (int)(temp ^ (temp >> 32));
+            result = prime * result + (int)(temp ^ temp >> 32);
             temp = BitConverter.DoubleToInt64Bits(y);
-            result = prime * result + (int)(temp ^ (temp >> 32));
+            result = prime * result + (int)(temp ^ temp >> 32);
             return result;
         }
 

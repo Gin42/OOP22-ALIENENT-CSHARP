@@ -1,4 +1,7 @@
-namespace Alienent{
+using Alienent.geometry;
+
+namespace Alienent.Api
+{
     public class GameObjectAbs : IGameObject
     {
         private Point2D _position;

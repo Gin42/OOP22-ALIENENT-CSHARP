@@ -1,4 +1,5 @@
-namespace Alienent{
+namespace Alienent.geometry
+{
     public sealed class Vector2D
     {
         private const int ROUND_ANGLE = 360;
@@ -37,7 +38,7 @@ namespace Alienent{
             else
             {
                 double aTan = Math.Atan2(yComp, xComp);
-                angle = xComp < 0 ? (aTan * FLAT_ANGLE / Math.PI) + FLAT_ANGLE : (aTan * FLAT_ANGLE / Math.PI);
+                angle = xComp < 0 ? aTan * FLAT_ANGLE / Math.PI + FLAT_ANGLE : aTan * FLAT_ANGLE / Math.PI;
             }
             return new Vector2D(angle, module);
         }
@@ -86,7 +87,7 @@ namespace Alienent{
             return newAngle;
         }
 
-        public override string ToString() => $"Vector2D [module={this._module}, angle={this._angle}]";
+        public override string ToString() => $"Vector2D [module={_module}, angle={_angle}]";
 
         public override int GetHashCode()
         {
@@ -94,9 +95,9 @@ namespace Alienent{
             int result = 1;
             long temp;
             temp = BitConverter.DoubleToInt64Bits(_module);
-            result = prime * result + (int)(temp ^ (temp >> 32));
+            result = prime * result + (int)(temp ^ temp >> 32);
             temp = BitConverter.DoubleToInt64Bits(_angle);
-            result = prime * result + (int)(temp ^ (temp >> 32));
+            result = prime * result + (int)(temp ^ temp >> 32);
             return result;
         }
 

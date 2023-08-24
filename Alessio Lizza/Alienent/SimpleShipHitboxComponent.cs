@@ -1,6 +1,8 @@
-using static Alienent.IHitboxComponent;
+using Alienent.Api;
+using static Alienent.Api.IHitboxComponent;
 
-namespace Alienent {
+namespace Alienent
+{
     public class SimpleShipHitboxComponent : AbstractCircleHitboxComponent
     {
         public SimpleShipHitboxComponent(IGameObject @object, bool enabled, TypeObject objectType, double radius)
