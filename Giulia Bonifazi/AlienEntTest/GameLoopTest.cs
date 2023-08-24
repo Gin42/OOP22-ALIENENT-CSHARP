@@ -44,14 +44,14 @@ namespace AlienEntTest
 
             // Resume the loop and check that the enemies keep spawning.
             _gameLoop.ResumeLoop();
-            Thread.Sleep(1000);
+            Thread.Sleep(enemySpawnTimeMillis * 2);
             Assert.IsTrue(exp < _rendererManager.RendererCount);
         }
 
         [TestMethod]
         public void StopTest()
         {
-            int waitForThreadDeath = 500;
+            int waitForThreadDeath = 5000;
 
             _gameLoop.StartLoop();
             _cts.Cancel();

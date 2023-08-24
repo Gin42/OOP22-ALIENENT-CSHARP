@@ -12,7 +12,7 @@ namespace AlienEnt.Props
         private readonly IWorld _world;
         private double _timeSinceSpawn;
         private double _objX = 0;
-        public static readonly double s_enemySpawnTime = 0.5;
+        public static readonly double s_enemySpawnTime = 1.5;
 
         public PropEnemySpawner(Point2D topRight, Point2D bottomLeft, IWorld world, PropGameObject player)
         {
