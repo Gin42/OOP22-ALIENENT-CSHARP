@@ -12,6 +12,7 @@ namespace AlienEnt.Props
         private readonly IWorld _world;
         private double _timeSinceSpawn;
         private double _objX = 0;
+        public static readonly double s_enemySpawnTime = 0.5;
 
         public PropEnemySpawner(Point2D topRight, Point2D bottomLeft, IWorld world, PropGameObject player)
         {
@@ -22,7 +23,7 @@ namespace AlienEnt.Props
         public void Update(double deltaTime)
         {
             _timeSinceSpawn += deltaTime;
-            if (_timeSinceSpawn > 0.5 && _world.EnemyCount < s_maxEnemy)
+            if (_timeSinceSpawn > s_enemySpawnTime && _world.EnemyCount < s_maxEnemy)
             {
                 _world.AddGameObject(new PropGameObject(new Point2D(_objX++, 0), s_stats, "enemy"));
                 _timeSinceSpawn = 0.0;
