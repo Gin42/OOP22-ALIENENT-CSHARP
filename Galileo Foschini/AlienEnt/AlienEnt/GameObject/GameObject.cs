@@ -53,22 +53,13 @@ namespace AlienEnt.GameObject
         }
 
         /// <inheritdoc/>
-        public ISet<IComponent> GetAllComponents()
-        {
-            return new HashSet<IComponent>(_components);
-        }
+        public ISet<IComponent> GetAllComponents() => new HashSet<IComponent>(_components);
 
         /// <inheritdoc/>
-        public IDictionary<Statistic, int> GetAllStats()
-        {
-            return new Dictionary<Statistic, int>(_stats);
-        }
+        public IDictionary<Statistic, int> GetAllStats() => new Dictionary<Statistic, int>(_stats);
 
         /// <inheritdoc/>
-        public int GetHealth()
-        {
-            return _hp;
-        }
+        public int GetHealth() => _hp;
 
         /// <inheritdoc/>
         public int? GetStatValue(Statistic stat)
@@ -83,6 +74,9 @@ namespace AlienEnt.GameObject
             if (heal < 0)
                 throw new ArgumentOutOfRangeException($"the value {heal} is not valid for the heal method");
             _hp += heal;
+            if(_hp > GetStatValue(Statistic.HP))
+                _hp = GetStatValue(Statistic.HP) ?? 0;
+
         }
 
         /// <inheritdoc/>
@@ -94,10 +88,7 @@ namespace AlienEnt.GameObject
         }
 
         /// <inheritdoc/>
-        public bool IsAlive()
-        {
-            return _hp > 0;
-        }
+        public bool IsAlive() => _hp > 0;
 
         /// <inheritdoc/>
         public void Recovery(double deltatime)
