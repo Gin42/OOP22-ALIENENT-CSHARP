@@ -56,6 +56,13 @@ namespace AlienEnt.GameObject
         public ISet<IComponent> GetAllComponents() => new HashSet<IComponent>(_components);
 
         /// <inheritdoc/>
+        public T? GetComponent<T>() where T : IComponent
+        {
+            return (T?) GetAllComponents()
+                    .FirstOrDefault(com => com is T, null);
+        }
+
+        /// <inheritdoc/>
         public IDictionary<Statistic, int> GetAllStats() => new Dictionary<Statistic, int>(_stats);
 
         /// <inheritdoc/>
@@ -93,13 +100,12 @@ namespace AlienEnt.GameObject
         /// <inheritdoc/>
         public void Recovery(double deltatime)
         {
+            _recoveryCooldown += deltatime;
             if (_recoveryCooldown > 1)
             {
                 Heal(GetStatValue(Statistic.RECOVERY) ?? 0);
                 _recoveryCooldown = 0;
             }
-            else
-                _recoveryCooldown += deltatime;
         }
 
         /// <inheritdoc/>
