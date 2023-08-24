@@ -41,11 +41,7 @@ namespace AlienEnt.GameObject
         /// </summary>
         /// <typeparam name="T">type of component you want</typeparam>
         /// <returns>The component of the given type</returns>
-        T? GetComponent<T>() where T : IComponent
-        {
-            return (T?) GetAllComponents()
-                    .FirstOrDefault(com => com is T, null);
-        }
+        T? GetComponent<T>() where T : IComponent;
 
         /// <summary>
         /// return a list of all components.
